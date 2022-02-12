@@ -1,44 +1,36 @@
-import { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import GoogleMapReact from "google-map-react";
+import Marker from "./Marker";
+
+const WARSAW_CENTRAL = {
+  lat: 52.22901769567979,
+  lng: 21.00323072731575
+};
+
+const RASOI = {
+  lat: 52.22950007956543,
+  lng: 20.999896169143675
+};
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {" | "}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+    <div style={{ height: "100vh", width: "100%" }}>
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: import.meta.env.VITE_GOOGLE_MAP_TOKEN }}
+        defaultCenter={WARSAW_CENTRAL}
+        defaultZoom={18}
+      >
+        <Marker
+          lat={WARSAW_CENTRAL.lat}
+          lng={WARSAW_CENTRAL.lng}
+          text="Shitty communist railway station"
+        />
+        <Marker
+          lat={RASOI.lat}
+          lng={RASOI.lng}
+          text="Rasoi Indian Restaurant"
+        />
+      </GoogleMapReact>
     </div>
   );
 }
